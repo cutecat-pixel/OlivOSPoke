@@ -14,7 +14,7 @@ import OlivOS
 import OlivOSPoke
 import os
 import json
-import re                               #正则表达式库，用于匹配指令
+import re                             
 import random
 import os
 import uuid
