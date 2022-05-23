@@ -71,4 +71,5 @@ def poke_reply(plugin_event, Proc):
             if reply_text['reply'] == []:
                 pass
             else:
+                reply_text['reply'] = list(set(reply_text['reply']))
                 plugin_event.reply(random.choice(reply_text['reply']))
