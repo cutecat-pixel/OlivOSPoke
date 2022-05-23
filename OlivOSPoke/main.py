@@ -58,15 +58,7 @@ def unity_reply(plugin_event, Proc):
             json.dump(reply_text, file, indent=4, ensure_ascii=False)
 
 def poke_reply(plugin_event, Proc):
-    if plugin_event.data.target_id == '614472532':
-        if plugin_event.data.user_id == '614472532':
-            pass
-        elif plugin_event.data.user_id == plugin_event.base_info['self_id']:
-            pass
-        else:
-            with open("plugin/data/OlivOSPoke/Data.json", "r", encoding="utf-8") as file:
-                reply_text = json.load(file)
-                if reply_text['reply'] == []:
-                    pass
-                else:
-                    plugin_event.reply(random.choice(reply_text['reply']))
+    if plugin_event.data.target_id == plugin_event.base_info['self_id']:
+         plugin_event.reply(random.choice(reply_text['reply']))
+    elif plugin_event.data.group_id == -1:
+         plugin_event.reply(random.choice(reply_text['reply']))
