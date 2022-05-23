@@ -14,7 +14,7 @@ import OlivOS
 import OlivOSPoke
 import os
 import json
-import re                             
+import re                               #正则表达式库，用于匹配指令
 import random
 import os
 import uuid
@@ -59,6 +59,16 @@ def unity_reply(plugin_event, Proc):
 
 def poke_reply(plugin_event, Proc):
     if plugin_event.data.target_id == plugin_event.base_info['self_id']:
-         plugin_event.reply(random.choice(reply_text['reply']))
+        with open("plugin/data/OlivOSPoke/Data.json", "r", encoding="utf-8") as file:
+            reply_text = json.load(file)
+            if reply_text['reply'] == []:
+                pass
+            else:
+                plugin_event.reply(random.choice(reply_text['reply']))
     elif plugin_event.data.group_id == -1:
-         plugin_event.reply(random.choice(reply_text['reply']))
+        with open("plugin/data/OlivOSPoke/Data.json", "r", encoding="utf-8") as file:
+            reply_text = json.load(file)
+            if reply_text['reply'] == []:
+                pass
+            else:
+                plugin_event.reply(random.choice(reply_text['reply']))
