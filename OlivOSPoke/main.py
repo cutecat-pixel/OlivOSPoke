@@ -50,26 +50,26 @@ def deleteBlank(str):
     return str_list
 
 def unity_reply(plugin_event, Proc):
-    command_list = deleteBlank(plugin_event.data.message)
-    if command_list[0] == '戳一戳回复添加':
+    command_list = plugin_event.data.message
+    if command_list[0:7] == '戳一戳回复添加':
         try:
             with open("plugin/data/OlivOSPoke/Data.json","r",encoding="utf-8") as file:
                 reply_text = json.load(file)
             with open("plugin/data/OlivOSPoke/Data.json","w",encoding="utf-8") as file:
-                reply_text['reply'].append(command_list[1])
-                reply_text['reply'] = list(set(reply_text['reply'])) #去重
+                reply_text['reply'].append(command_list[8:])
+                reply_text['reply'] = list(set(reply_text['reply']))  # 去重
                 json.dump(reply_text, file, indent=4, ensure_ascii=False)
             plugin_event.reply('回复已添加')
         except Exception as e:
             print(e)
             plugin_event.reply('添加失败了')
-    elif command_list[0] == '戳一戳回复删除':
+    elif command_list[0:7] == '戳一戳回复删除':
         try:
             with open("plugin/data/OlivOSPoke/Data.json", "r", encoding="utf-8") as file:
                 reply_text = json.load(file)
             with open("plugin/data/OlivOSPoke/Data.json", "w", encoding="utf-8") as file:
                 reply_text['reply'] = list(set(reply_text['reply']))  # 去重
-                reply_text['reply'].remove(command_list[1])
+                reply_text['reply'].remove(command_list[8:])
                 json.dump(reply_text, file, indent=4, ensure_ascii=False)
             plugin_event.reply('回复已删除')
         except Exception as e:
